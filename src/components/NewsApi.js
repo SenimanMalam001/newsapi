@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import axios from 'axios'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 class NewsApi extends Component {
 
@@ -15,7 +15,6 @@ class NewsApi extends Component {
     axios.get('https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=191022accf2a4053b889f3f06c64e4bc')
     .then((res)=> {
     console.log(res.data)
-    //serults
     this.setState
     (
       {author: res.data.articles}
@@ -23,24 +22,22 @@ class NewsApi extends Component {
     }).catch(err => console.log(err))
 }
 
-     render() {
+    render() {
     return (
-      <div className="App">
+      <div className="App" align="center">
       
       {
         this.state.author.map((data, index) => {
           return (
-            <div key={index}>
-              <h5>Title <a href={data.url}> {data.title} </a></h5> 
-              <h5>Gambar <a href={data.urlToImage}> {data.urlToImage} </a></h5> 
+            <div className="content" key={index}>
+              <h5><Link to={`/newsapi/${index}`}> {data.title} </Link></h5>
             </div>
           )
         })
       }
-      
      </div>
     );
   }
 }
 
-export default NewsApi;
+export default NewsApi
